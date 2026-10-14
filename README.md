@@ -1,5 +1,9 @@
 # Email & SMS Spam Detection System
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://email-spam-detector-akiitgn.streamlit.app)
+
+> 🚀 **Live Application**: Try the detector online at **[email-spam-detector-akiitgn.streamlit.app](https://email-spam-detector-akiitgn.streamlit.app)**
+
 A complete machine learning and NLP application that classifies incoming messages as **Spam** or **Ham (Legitimate)**. The project features exploratory data analysis, text preprocessing, multi-model benchmarking (BernoulliNB, MultinomialNB, ComplementNB), an ensemble majority voting classifier, and a real-time **Streamlit** web application.
 
 ---
