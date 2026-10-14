@@ -13,12 +13,9 @@ st.set_page_config(
     layout="centered"
 )
 
-# Auto-download required NLTK datasets for cloud environments (Streamlit Cloud, Render, etc.)
-for pkg in ['punkt', 'stopwords', 'wordnet']:
-    try:
-        nltk.data.find(f'corpora/{pkg}')
-    except LookupError:
-        nltk.download(pkg, quiet=True)
+# Ensure required NLTK datasets are downloaded (including punkt_tab for NLTK >= 3.9)
+for pkg in ['punkt', 'punkt_tab', 'stopwords', 'wordnet']:
+    nltk.download(pkg, quiet=True)
 
 lemma = WordNetLemmatizer()
 
