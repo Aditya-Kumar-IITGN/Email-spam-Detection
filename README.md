@@ -1,80 +1,87 @@
-# Spam Detection Project
+# Email & SMS Spam Detection System
 
-A machine learning project that uses Naive Bayes classification to detect spam messages. The project includes a trained model, web interface, and comprehensive testing.
+A complete machine learning and NLP application that classifies incoming messages as **Spam** or **Ham (Legitimate)**. The project features exploratory data analysis, text preprocessing, multi-model benchmarking (BernoulliNB, MultinomialNB, ComplementNB), an ensemble majority voting classifier, and a real-time **Streamlit** web application.
+
+---
 
 ## Project Structure
 
-- `Spam_detection.ipynb` - Jupyter notebook containing the model development and analysis
-- `spam_detector.py` - Python script for the spam detection implementation
-- `model.pkl` - Trained Naive Bayes model
-- `vectorizer.pkl` - Text vectorizer for feature extraction
-- `spam.txt` - Dataset containing spam and ham messages
-- `requirements.txt` - Python dependencies
+```text
+├── Spam_detection.ipynb    # End-to-end ML notebook: EDA, preprocessing, training & benchmarking
+├── spam_detector.py        # Streamlit web application for real-time inference
+├── model.pkl               # Serialized production classifier (Majority Voting Ensemble)
+├── vectorizer.pkl          # Serialized fitted TF-IDF Vectorizer (3,000 features)
+├── spam.txt                # Raw SMS & Email dataset (5,572 tab-separated messages)
+├── requirements.txt        # Project dependencies
+├── Screenshot/             # Visualizations (confusion matrix, word clouds, web UI)
+└── README.md               # Project documentation
+```
 
-## Features
+---
 
-- Naive Bayes classification for spam detection
-- Text preprocessing and vectorization
-- Web interface for real-time predictions
-- Model evaluation with confusion matrix
+## Model Benchmark & Comparison
 
-## Model Performance
+The project benchmarks multiple classification algorithms on the 20% test holdout (1,034 messages):
 
-The Naive Bayes classifier shows excellent performance in distinguishing between spam and legitimate messages:
+| Model Architecture | Accuracy | Spam Precision | Spam Recall | Spam F1-Score | Remarks |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Majority Voting Ensemble (BNB + MNB + CNB)** | **98.55%** | **99.20%** | **90.00%** | **0.94** | **Selected for Production**: Catches more spam while neutralizing false alarms. |
+| **BernoulliNB (Original)** | 98.55% | 100.0% | 89.29% | 0.94 | Strong baseline with 0 false positives; misses ~10.7% of spam. |
+| **MultinomialNB** | 97.68% | 99.15% | 83.57% | 0.91 | Lower recall due to word frequency dilution on short text. |
+| **ComplementNB** | 91.10% | 61.01% | 95.00% | 0.74 | High recall, but produces 85 false alarms on legitimate messages. |
 
-![Naive Bayes Confusion Matrix](Screenshot/Naive%20bayes%20confusion%20matrix.png)
+---
 
 ## Web Interface
 
-The project includes a user-friendly web interface for testing the spam detector:
+The project includes an interactive web interface powered by Streamlit:
 
-### Deployed Application
+### Deployed Application Interface
 ![Deployed Interface](Screenshot/deployed.png)
 
-### Testing Examples
+### Word Clouds
+* **Ham (Legitimate) Word Cloud**:
+  ![Ham Detection](Screenshot/ham.png)
 
-**Ham (Legitimate) Message Word Cloud:**
-![Ham Detection](Screenshot/ham.png)
+* **Spam Word Cloud**:
+  ![Spam Detection](Screenshot/spam.png)
 
-**Spam Message Word Cloud:**
-![Spam Detection](Screenshot/spam.png)
+---
 
-**Testing Interface:**
-![Testing Interface](Screenshot/testing.png)
+## Local Setup & Running the Application
 
-## Installation
-
-1. Clone the repository
-2. Install dependencies:
+### 1. Clone the repository
 ```bash
+git clone https://github.com/Destructor169/Email-spam-Detection.git
+cd Email-spam-Detection
+```
+
+### 2. Set up virtual environment & install dependencies
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Usage
-
-1. Run the spam detector:
+### 3. Launch the Streamlit Web Application
 ```bash
-python spam_detector.py
+streamlit run spam_detector.py
 ```
+Open your browser at `http://localhost:8501`.
 
-2. Open the web interface in your browser
-3. Enter a message to test whether it's spam or ham
+---
 
-## Model Training
+## Deployment to Streamlit Community Cloud (Free Hosting)
 
-The model was trained using the dataset in `spam.txt` and uses:
-- Text preprocessing and cleaning
-- TF-IDF vectorization
-- Naive Bayes classification
-- Cross-validation for model evaluation
-
-For detailed analysis and training process, see the [Spam_detection.ipynb](Spam_detection.ipynb) notebook.
-
-## Files Description
-
-- **[model.pkl](model.pkl)** - Serialized trained Naive Bayes model
-- **[vectorizer.pkl](vectorizer.pkl)** - Serialized TF-IDF vectorizer
-- **[spam_detector.py](spam_detector.py)** - Main application script
-- **[spam.txt](spam.txt)** - Training dataset
-- **[Spam_detection.ipynb](Spam_detection.ipynb)** - Development notebook
-- **[requirements.txt](requirements.txt)** - Project dependencies
+1. Push your updated code to your GitHub repository:
+   ```bash
+   git add .
+   git commit -m "Production model and deployment configuration"
+   git push origin main
+   ```
+2. Navigate to [share.streamlit.io](https://share.streamlit.io) and log in with your GitHub account.
+3. Click **"New app"** and enter:
+   * **Repository**: `Destructor169/Email-spam-Detection`
+   * **Branch**: `main`
+   * **Main file path**: `spam_detector.py`
+4. Click **Deploy!** Your app will be live on a public HTTPS URL.
