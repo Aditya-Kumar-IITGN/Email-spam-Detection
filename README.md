@@ -72,20 +72,3 @@ pip install -r requirements.txt
 streamlit run spam_detector.py
 ```
 Open your browser at `http://localhost:8501`.
-
----
-
-## Deployment to Streamlit Community Cloud (Free Hosting)
-
-1. Push your updated code to your GitHub repository:
-   ```bash
-   git add .
-   git commit -m "Production model and deployment configuration"
-   git push origin main
-   ```
-2. Navigate to [share.streamlit.io](https://share.streamlit.io) and log in with your GitHub account.
-3. Click **"New app"** and enter:
-   * **Repository**: `Aditya-Kumar-IITGN/Email-spam-Detection`
-   * **Branch**: `main`
-   * **Main file path**: `spam_detector.py`
-4. Click **Deploy!** Your app will be live on a public HTTPS URL.
