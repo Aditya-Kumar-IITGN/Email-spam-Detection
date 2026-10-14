@@ -52,7 +52,7 @@ The project includes an interactive web interface powered by Streamlit:
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Destructor169/Email-spam-Detection.git
+git clone https://github.com/Aditya-Kumar-IITGN/Email-spam-Detection.git
 cd Email-spam-Detection
 ```
 
@@ -81,7 +81,7 @@ Open your browser at `http://localhost:8501`.
    ```
 2. Navigate to [share.streamlit.io](https://share.streamlit.io) and log in with your GitHub account.
 3. Click **"New app"** and enter:
-   * **Repository**: `Destructor169/Email-spam-Detection`
+   * **Repository**: `Aditya-Kumar-IITGN/Email-spam-Detection`
    * **Branch**: `main`
    * **Main file path**: `spam_detector.py`
 4. Click **Deploy!** Your app will be live on a public HTTPS URL.
